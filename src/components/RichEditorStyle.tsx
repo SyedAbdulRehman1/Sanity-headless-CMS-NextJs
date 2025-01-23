@@ -11,6 +11,6 @@ export const RichEditorStyle : PortableTextComponents ={
         bullet:({children}:any)=><li className="list-desc marker:text-accentDarkSecondary list-inside ml4">{children}</li>
     },
     marks:{
-        strong:({children}:any)=><strong className="font-bold text-white">{children}</strong>
+        strong:({children}:any)=><strong className="font-bold">{children}</strong>
     }
 }

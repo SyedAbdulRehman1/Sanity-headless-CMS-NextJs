@@ -44,27 +44,32 @@ export default function Navbar() {
     ${"bg-primary-extradark-main"} border-[rgba(255,255,255,0.1)] navbar-backdrop-filter  `}
         >
           <div className="flex gap-8 items-center">
-            {/* <a href={"/"}>
+            <a href={"/"}>
               <Image
-                src="/assets/logo-white1.svg"
-                alt="Wanya Logo"
-                width={99.55}
+                src="/main-logo.png"
+                alt="main logo"
+                width={40}
                 height={28.84}
-                className="lg:w-[99.55px] lg:h-[28.84px] w-[78px] h-[22.6px]"
+                className="lg:h-[28.84px] w-[40px] h-[22.6px]"
               />
-            </a> */}
-              <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
+            </a>
+              {/* <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
                 Home
-              </Link>
+              </Link> */}
             <div className=" block vertical-line-green"></div>
 
+            <div className="items-center justify-between  gap-8 text-black flex">
+            <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
+                Home
+              </Link>
+            </div>
             <div className="items-center justify-between  gap-8 text-black flex">
               <Link href={"/blog"} className={`menu-text hover:text-[#499A16]`}>
                 Blogs
               </Link>
             </div>
             <div className="items-center justify-between  gap-8 text-black flex">
-              <Link href={"#"} className={`menu-text hover:text-[#499A16]`}>
+              <Link href={"/article"} className={`menu-text hover:text-[#499A16]`}>
                 News
               </Link>
             </div>

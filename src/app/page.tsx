@@ -38,7 +38,7 @@ export default async function Home() {
   return (
     <main className="flex mt-6  min-h-screen flex-col ">
       <h1 className="news-text ">Most Recent blogs</h1>
-      <section className="grid mt-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <section className="grid mt-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {posts.map((post: Post) => (
           <BlogCard post={post} key={post.slug} />
         ))}

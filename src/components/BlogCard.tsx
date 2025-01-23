@@ -9,7 +9,7 @@ export default function BlogCard({post}:{post:Post}) {
         <Image
           src={urlFor(post.image)}
           alt="AI for everyone"
-          width={300}
+          width={250}
           height={250}
           className="object-cover rounded-lg"
         />
@@ -26,7 +26,7 @@ export default function BlogCard({post}:{post:Post}) {
 
         <Link
           href={`/blog/${post.slug}`}
-          className="block px-4 py-1 text-center bg-accentDarkSecondary  rounded text-dark font-semibold mt-4"
+          className="block px-4 py-1 text-center bg-primary-semibold  rounded text-white font-medium mt-4"
         >
           Read More
         </Link>

@@ -53,7 +53,7 @@ export default async function ArticleListPage() {
         >
           <a
             className={`flex w-full justify-between md:flex-row flex-col`}
-            href={`/article/${post.slug}`}
+            href={`/article/${post.slug.current}`}
           >
             <div
               className={`flex md:pr-[84px] flex-col md:flex-row 

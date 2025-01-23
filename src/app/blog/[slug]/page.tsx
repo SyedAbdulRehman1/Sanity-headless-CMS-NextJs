@@ -6,8 +6,18 @@ import Image from "next/image";
 
 export const revalidate = 10;
 
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
 
-export default async function page({params:{slug}}:{params:{slug:string}}) {
+// export default async function page({ params: { slug } }: PageProps) {
+  export default async function page({ params }: { params: Promise<{ slug: string }> }) {
+    // Wait for the resolution of params
+    const resolvedParams = await params;
+    const { slug } = resolvedParams;
+  
   console.log(slug,"sllsuu")
   const query = `*[_type == 'post' && slug.current == '${slug}']{
     title,

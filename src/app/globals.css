@@ -2,3 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+.menu-text {
+    font-size: 16px;
+    line-height: 22px;
+    font-family: "Gilroy";
+    color: #ffffff;
+  }
+  .blog-side-trend-title {
+    font-size: 20px;
+    line-height: 32px;
+    font-family: "GilroySemiBold";
+    color: #0b231d;
+  }
+  
+  .blog-trend-title {
+    font-size: 24px;
+    line-height: 32px;
+    font-family: "GilroySemiBold";
+    color: #0b231d;
+  }
+  .blog-trend-readpost {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "GilroySemiBold";
+    color: #63c121;
+    border-bottom: 1px solid;
+    width: fit-content;
+    line-height: 0.9;
+    /* text-decoration: underline;; */
+    cursor: pointer;
+  }
+  
+.news-text {
+    font-size: 52px;
+    line-height: 62.87px;
+    font-family: GilroyBold;
+    color: #0b231d;
+}

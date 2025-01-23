@@ -22,7 +22,10 @@ const config: Config = {
         primary:"##b63e96",
         primaryDark:"##58e6d9",
         accentDarkPrimary:"#a020f0",
-        accentDarkSecondary: "#f0a020"
+        accentDarkSecondary: "#f0a020",
+        'primary-semibold': '#24765D',
+        'primary-extradark': '#0B231D',
+        'primary-extradark-main': '#081B16',
       },
       screens:{
         xs: "479px",

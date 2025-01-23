@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
+import Link from "next/link";
 
 export const revalidate = 10;
 
@@ -45,12 +46,12 @@ interface PageProps {
         width={500}
         height={500}
         alt="AI for everyone"
-        className="rounded"
+        className="rounded-lg w-auto"
       />
 
       {/* Blog Summary Section */}
       <section>
-      <h2 className="text-xl xs:text-2xl md:text-3xl font-bold uppercase text-accentDarkPrimary">
+      <h2 className="text-xl xs:text-2xl md:text-3xl font-bold uppercase text-primary-extradark-main">
         Summary
       </h2>
       <p className="text-base md:text-xl leading-relaxed text-justify text-dark/80 dark:text-light/80">
@@ -81,6 +82,7 @@ interface PageProps {
       <section className="text-lg leading-normal text-dark/80 dark:text-light/80">
        <PortableText components={RichEditorStyle}  value={post.content}/>
       </section>
+      <Link href={"/blog"} className="text-primary-semibold">Back</Link>
     </article>
   );
 }

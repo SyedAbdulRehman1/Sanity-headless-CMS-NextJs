@@ -22,7 +22,7 @@ interface PageProps {
   console.log(slug,"sllsuu")
   const query = `*[_type == 'post' && slug.current == '${slug}']{
     title,
-    summary,
+    Summary,
     image{asset->{url}}, // Handle nested image
     content,
     author->{
@@ -32,6 +32,7 @@ interface PageProps {
     }
   }[0]`;
       const post = await client.fetch(query);
+      console.log(post,"auttht")
   return (
     <article className="mt-12 mb-24 px-2 2xl:px-12 flex flex-col gap-y-8">
 
@@ -55,7 +56,7 @@ interface PageProps {
         Summary
       </h2>
       <p className="text-base md:text-xl leading-relaxed text-justify text-dark/80 dark:text-light/80">
-       {post.summary}
+       {post.Summary}
       </p>
       </section>
 

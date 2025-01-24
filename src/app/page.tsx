@@ -39,9 +39,12 @@ export default async function Home() {
     <main className="flex mt-6  min-h-screen flex-col ">
       <h1 className="news-text ">Most Recent blogs</h1>
       <section className="grid mt-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        {posts.map((post: Post) => (
+
+        {posts.length > 0 ? ( posts.map((post: Post) => (
           <BlogCard post={post} key={post.slug} />
-        ))}
+        ))):(
+          <div>No Record Found</div>
+        )}
       </section>
       <section className="mt-8">
         <div className="flex  justify-between ">
@@ -58,67 +61,70 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+        {articles.length > 0 ? (
+          articles.map((post: any, index: any) => {
+            const isLastItem = index === posts.length - 1;
 
-        {articles.map((post: any, index: any) => {
-          const isLastItem = index === posts.length - 1;
+            const borderClass = `${
+              isLastItem ? "border-y pb-[41px]" : "border-t"
+            } border-[#E4E7EC]`;
 
-          const borderClass = `${
-            isLastItem ? "border-y pb-[41px]" : "border-t"
-          } border-[#E4E7EC]`;
-
-          return (
-            <div
-              key={index}
-              className={`flex pb-6 pt-6 lg:py-[25px]  justify-between items-center  ${borderClass}`}
-            >
-              <a
-                className={`flex w-full justify-between md:flex-row flex-col`}
-                href={`/article/${post.slug}`}
+            return (
+              <div
+                key={index}
+                className={`flex pb-6 pt-6 lg:py-[25px]  justify-between items-center  ${borderClass}`}
               >
-                <div
-                  className={`flex md:pr-[84px] flex-col md:flex-row 
-                        "gap-4"
-                      md:gap-14 lg:gap-[126px]`}
+                <a
+                  className={`flex w-full justify-between md:flex-row flex-col`}
+                  href={`/article/${post.slug}`}
                 >
-                  <div className="flex flex-col shrink-0 gap-2">
-                    <div className={`news-details-text cursor-pointer`}>
-                      {formatDotDate(post._createdAt)}
-                    </div>
-                  </div>
-                  <div>
-                    <p className={"news-title"}>{post.title}</p>
-                    <div
-                      className={`flex
-                          
-                         pt-4 md:pt-2`}
-                    >
-                      <div className="news-desc hidden md:block cursor-pointer">
-                        {post.Summary && truncateStr(post.Summary, 85)}
+                  <div
+                    className={`flex md:pr-[84px] flex-col md:flex-row 
+                "gap-4"
+              md:gap-14 lg:gap-[126px]`}
+                  >
+                    <div className="flex flex-col shrink-0 gap-2">
+                      <div className={`news-details-text cursor-pointer`}>
+                        {formatDotDate(post._createdAt)}
                       </div>
+                    </div>
+                    <div>
+                      <p className={"news-title"}>{post.title}</p>
                       <div
-                        className={`news-desc"
-                              block md:hidden cursor-pointer`}
+                        className={`flex
+                  
+                 pt-4 md:pt-2`}
                       >
-                        {/* {a.description && truncateString(a.description, 70)} */}
+                        <div className="news-desc hidden md:block cursor-pointer">
+                          {post.Summary && truncateStr(post.Summary, 85)}
+                        </div>
+                        <div
+                          className={`news-desc"
+                      block md:hidden cursor-pointer`}
+                        >
+                          {/* {a.description && truncateString(a.description, 70)} */}
+                        </div>
+                      </div>
+                      <div className="news-Vdetails-text block pt-4  md:hidden cursor-pointer">
+                        View details
                       </div>
                     </div>
-                    <div className="news-Vdetails-text block pt-4  md:hidden cursor-pointer">
-                      View details
-                    </div>
                   </div>
-                </div>
 
-                <Image
-                  src={urlFor(post.image)}
-                  alt={"a.cover.alternativeText"}
-                  width={262}
-                  height={161}
-                  className="hidden object-fill rounded-2xl md:block w-[262px] h-[161px]"
-                />
-              </a>
-            </div>
-          );
-        })}
+                  <Image
+                    src={urlFor(post.image)}
+                    alt={"a.cover.alternativeText"}
+                    width={262}
+                    height={161}
+                    className="hidden object-fill rounded-2xl md:block w-[262px] h-[161px]"
+                  />
+                </a>
+              </div>
+            );
+          })
+        ) : (
+          <div className="mt-4">No Record Found</div>
+        )}
       </section>
     </main>
   );

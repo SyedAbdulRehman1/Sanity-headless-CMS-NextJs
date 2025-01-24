@@ -19,7 +19,7 @@ export default async function BlogListPage() {
     }
     return text;
   };
-  console.log(allBlogs,"dfdf")
+  console.log(allBlogs.length,"dfdf")
   return (
     <section className="mt-20 h-[100vh] mb-24 px-2 2xl:px-12">
       <h1 className="text-3xl font-bold text-dark dark:text-light">
@@ -49,7 +49,7 @@ export default async function BlogListPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-[100%]">
         {allBlogs?.map((blog: any, groupIndex: any) => (
-          <div key={blog.slug.current} className="flex gap-8 flex-col">
+          <div key={groupIndex} className="flex gap-8 flex-col">
             {/* <Link href={`/blog/${post?.slug}`}> */}
             <div
               key={blog?.slug.current}

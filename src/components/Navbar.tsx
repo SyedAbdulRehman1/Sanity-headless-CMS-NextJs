@@ -4,14 +4,37 @@ import Image from "next/image";
 import { startTransition, useEffect, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
+// import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; // Icons for menu
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const pathname = usePathname(); 
-
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Track menu state
+
+  const checkLoginStatus = () => {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken="))
+      ?.split("=")[1];
+
+    setIsLoggedIn(token ? true : false);
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, [pathname]);
+
+  const router = useRouter();
+
+  const handleNavigation = (link: string) => {
+    startTransition(() => {
+      router.push(link);
+    });
+  };
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (previous) {
@@ -24,26 +47,6 @@ export default function Navbar() {
     setIsScrolled(latest > 320);
   });
 
-  const checkLoginStatus = () => {
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))
-      ?.split("=")[1];
-    
-    setIsLoggedIn(token ? true : false);
-  };
-
-  useEffect(() => {
-    checkLoginStatus();
-  }, [pathname]); 
-
-  const router = useRouter(); 
-
-  const handleNavigation = (link: string) => {
-    startTransition(() => {
-      router.push(link);
-    });
-  };
   return (
     <motion.div
       variants={{
@@ -52,21 +55,13 @@ export default function Navbar() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className={`fixed top-0   z-[100] left-0 right-0`}
+      className="fixed top-0 z-[100] left-0 right-0"
     >
-      <div
-        className="flex items-center  w-full "
-        // data-aos="fade-down"
-        // data-aos-delay="2000"
-        // data-aos-duration="1500"
-      >
-        <div
-          className={` py-2 lg:py-[9px]   lg:max-h-[78px]  lg:px-6 justify-between flex flex-wrap items-center px-4   w-full group  shrink-0 transition-colors duration-200 ease-in 
-         "bg-primary-extradark-main"
-    ${"bg-primary-extradark-main"} border-[rgba(255,255,255,0.1)] navbar-backdrop-filter  `}
-        >
-          <div className="flex gap-8 items-center">
-            <a href={"/"}>
+      <div className="flex items-center w-full bg-primary-extradark-main py-2 px-4 lg:px-6">
+        {/* Logo Section */}
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-4">
+            <a href="/">
               <Image
                 src="/main-logo.png"
                 alt="main logo"
@@ -75,92 +70,142 @@ export default function Navbar() {
                 className="lg:h-[28.84px] w-[40px] h-[22.6px]"
               />
             </a>
-            <div className=" block vertical-line-green"></div>
-
-            <div className="items-center justify-between  gap-8 text-black flex">
-              <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
+            <div className="hidden lg:flex gap-8">
+              <Link href="/" className="menu-text hover:text-[#499A16]">
                 Home
               </Link>
-            </div>
-            <div className="items-center justify-between  gap-8 text-black flex">
-              <Link href={"/blog"} className={`menu-text hover:text-[#499A16]`}>
+              <Link href="/blog" className="menu-text hover:text-[#499A16]">
                 Blogs
               </Link>
-            </div>
-            <div className="items-center justify-between  gap-8 text-black flex">
-              <Link
-                href={"/article"}
-                className={`menu-text hover:text-[#499A16]`}
-              >
+              <Link href="/article" className="menu-text hover:text-[#499A16]">
                 News
               </Link>
             </div>
           </div>
 
-          <div className="items-center  py-1 gap-8 flex">
-            <div className="flex gap-5 items-center"></div>
+          {/* Hamburger Menu */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-white text-2xl"
+            >
+              {menuOpen ? (
+                <Image
+                  height={30}
+                  width={30}
+                  src={"/icons8-cancel-50.png"}
+                  alt={"menu"}
+                />
+              ) : (
+                <Image
+                  height={30}
+                  width={30}
+                  src={"/icons8-hamburger-button-50.png"}
+                  alt={"menu"}
+                />
+              )}
+            </button>
           </div>
 
+          {/* Authentication Section */}
           {!isLoggedIn ? (
-            <div className="flex gap-1 items-center">
+            <div className="hidden lg:flex gap-1 items-center">
               <button
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavigation("/login?returnUrl=");
                 }}
-                className={`${"font-gilroyMedium text-sm text-white hover:text-secondary-1 py-2 px-4"} `}
+                className="font-gilroyMedium text-sm text-white hover:text-secondary-1 py-2 px-4"
               >
-                <a
-                  href={"/login?"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-4 w-full"
-                >
-                  Log in
-                </a>
+                Log in
               </button>
               <button
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavigation("/signup");
                 }}
-                className={`${"green-border-btn1 hover:bg-[#1E5E4B]"} `}
+                className="green-border-btn1 hover:bg-[#1E5E4B]"
               >
-                <a
-                  href={"/signup"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-4 w-full"
-                >
-                  Sign in
-                </a>
+                Sign in
               </button>
             </div>
           ) : (
-            <>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                document.cookie =
+                  "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                handleNavigation("/login");
+              }}
+              className="green-border-btn1 hover:bg-[#1E5E4B]"
+            >
+              Logout
+            </button>
+          )}
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="lg:hidden absolute top-12 left-0 right-0 bg-primary-extradark-main flex flex-col items-start gap-4 px-4 py-2">
+            <Link
+              href="/"
+              className="menu-text hover:text-[#499A16]"
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/blog"
+              className="menu-text hover:text-[#499A16]"
+              onClick={() => setMenuOpen(false)}
+            >
+              Blogs
+            </Link>
+            <Link
+              href="/article"
+              className="menu-text hover:text-[#499A16]"
+              onClick={() => setMenuOpen(false)}
+            >
+              News
+            </Link>
+
+            {!isLoggedIn ? (
+              <div className="flex gap-1 items-center">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigation("/login?returnUrl=");
+                  }}
+                  className="font-gilroyMedium text-sm text-white hover:text-secondary-1 py-2 px-4"
+                >
+                  Log in
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigation("/signup");
+                  }}
+                  className="green-border-btn1 hover:bg-[#1E5E4B]"
+                >
+                  Sign in
+                </button>
+              </div>
+            ) : (
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                  document.cookie =
+                    "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                   handleNavigation("/login");
                 }}
-              
-                className={`${"green-border-btn1 hover:bg-[#1E5E4B]"} `}
+                className="green-border-btn1 hover:bg-[#1E5E4B]"
               >
-                <a
-                  href={"/signup"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-4 w-full"
-                >
-                  Logout
-                </a>
+                Logout
               </button>
-            </>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
- 
   );
 }

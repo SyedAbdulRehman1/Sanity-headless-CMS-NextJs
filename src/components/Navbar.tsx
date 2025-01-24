@@ -60,7 +60,7 @@ export default function Navbar() {
       <div className="flex items-center w-full bg-primary-extradark-main py-2 px-4 lg:px-6">
         {/* Logo Section */}
         <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-8">
             <a href="/">
               <Image
                 src="/main-logo.png"
@@ -130,6 +130,7 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
+            <div className="hidden lg:flex">
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -137,10 +138,11 @@ export default function Navbar() {
                   "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 handleNavigation("/login");
               }}
-              className="green-border-btn1 hover:bg-[#1E5E4B]"
+              className="green-border-btn1 hidden lg:flex hover:bg-[#1E5E4B]"
             >
               Logout
             </button>
+            </div>
           )}
         </div>
 

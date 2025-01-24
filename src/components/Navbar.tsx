@@ -67,7 +67,7 @@ export default function Navbar() {
                 alt="main logo"
                 width={40}
                 height={28.84}
-                className="lg:h-[28.84px] w-[40px] h-[22.6px]"
+                className="h-[28.84px] w-[40px]"
               />
             </a>
             <div className="hidden lg:flex gap-8">

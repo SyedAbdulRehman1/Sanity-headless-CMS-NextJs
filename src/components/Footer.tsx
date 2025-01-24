@@ -1,9 +1,4 @@
-import Link from "next/link";
 import React from "react";
-import FooterContactForm from "./FooterContactForm";
-import FooterLearn from "./FooterLearn";
-import SocialMedia from "./SocialMedia";
-import Image from "next/image";
 
 export default function Footer() {
   return (

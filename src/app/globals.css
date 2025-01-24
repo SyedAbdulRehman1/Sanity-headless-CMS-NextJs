@@ -32,10 +32,45 @@
     /* text-decoration: underline;; */
     cursor: pointer;
   }
-  
+  .login-signup {
+    margin-top: 24;
+    font-family: "GilroyMedium";
+    font-size: 16px;
+    line-height: 22px;
+    background: #1a4b3d;
+    border-radius: 50px;
+    padding: 10px 12px;
+  }
 .news-text {
     font-size: 52px;
     line-height: 62.87px;
     font-family: GilroyBold;
     color: #0b231d;
+}
+.green-border-btn1 {
+  border: 1px solid #1e5e4b;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-family: "GilroyMedium";
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+.dont-acc {
+  font-family: "Gilroy";
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+.login-bottom-txt {
+  font-family: "Gilroy";
+  /* position: absolute; */
+  /* bottom: 32px; */
+  /* left: 32px; */
+  color: #475467;
+  font-size: 14px;
+  line-height: 20px;
 }

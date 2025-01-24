@@ -1,14 +1,15 @@
 "use client";
 import Link from "next/link";
-import SocialMedia from "./SocialMedia";
-import ThemeToggle from "./ThemeToggle";
 import Image from "next/image";
-import { useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const pathname = usePathname(); 
 
   const [isScrolled, setIsScrolled] = useState(false);
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -22,6 +23,27 @@ export default function Navbar() {
     }
     setIsScrolled(latest > 320);
   });
+
+  const checkLoginStatus = () => {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken="))
+      ?.split("=")[1];
+    
+    setIsLoggedIn(token ? true : false);
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, [pathname]); 
+
+  const router = useRouter(); 
+
+  const handleNavigation = (link: string) => {
+    startTransition(() => {
+      router.push(link);
+    });
+  };
   return (
     <motion.div
       variants={{
@@ -53,13 +75,10 @@ export default function Navbar() {
                 className="lg:h-[28.84px] w-[40px] h-[22.6px]"
               />
             </a>
-              {/* <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
-                Home
-              </Link> */}
             <div className=" block vertical-line-green"></div>
 
             <div className="items-center justify-between  gap-8 text-black flex">
-            <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
+              <Link href={"/"} className={`menu-text hover:text-[#499A16]`}>
                 Home
               </Link>
             </div>
@@ -69,7 +88,10 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="items-center justify-between  gap-8 text-black flex">
-              <Link href={"/article"} className={`menu-text hover:text-[#499A16]`}>
+              <Link
+                href={"/article"}
+                className={`menu-text hover:text-[#499A16]`}
+              >
                 News
               </Link>
             </div>
@@ -78,18 +100,67 @@ export default function Navbar() {
           <div className="items-center  py-1 gap-8 flex">
             <div className="flex gap-5 items-center"></div>
           </div>
+
+          {!isLoggedIn ? (
+            <div className="flex gap-1 items-center">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation("/login?returnUrl=");
+                }}
+                className={`${"font-gilroyMedium text-sm text-white hover:text-secondary-1 py-2 px-4"} `}
+              >
+                <a
+                  href={"/login?"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 w-full"
+                >
+                  Log in
+                </a>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation("/signup");
+                }}
+                className={`${"green-border-btn1 hover:bg-[#1E5E4B]"} `}
+              >
+                <a
+                  href={"/signup"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 w-full"
+                >
+                  Sign in
+                </a>
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                  handleNavigation("/login");
+                }}
+              
+                className={`${"green-border-btn1 hover:bg-[#1E5E4B]"} `}
+              >
+                <a
+                  href={"/signup"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 w-full"
+                >
+                  Logout
+                </a>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </motion.div>
-    // <header className=" flex items-center justify-between xs:flex-row py-2 border-b-2 border-accentDarkSecondary sticky top-0 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10">
-    //   <nav className=" flex md:flex md:items-center md:justify-center md:gap-x-24 font-bold uppercase">
-    //     <Link href={"/"} className="text-3xl text-dark dark:text-light">
-    //       DEV<span className="text-3xl text-accentDarkPrimary">LAB</span>
-    //     </Link>
-    //     {/* <Link href={"/blogs"} className="bg-accentDarkSecondary px-4 py-1 rounded-lg text-dark ">Blogs</Link> */}
-    //   </nav>
-    //   <SocialMedia />
-    //   <ThemeToggle />
-    // </header>
+ 
   );
 }

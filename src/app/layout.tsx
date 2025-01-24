@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ThemeProvider from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
+import { ToastContainer } from "react-toastify";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Container>
+            <ToastContainer/>
             <div className="h-[66px]">
               <Navbar />
             </div>

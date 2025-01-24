@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} bg-light dark:bg-dark `}>
+      <body className={`${montserrat.className} bg-light  `}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

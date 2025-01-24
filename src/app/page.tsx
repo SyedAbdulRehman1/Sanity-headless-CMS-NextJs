@@ -3,21 +3,9 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import { formatDotDate, truncateStr } from "./lib/common";
 export const revalidate = 10;
-export function truncateStr(str: string, length: number) {
-  if (str.length > length) return str;
-  else return str.substr(0, length) + "...";
-}
-export function formatDotDate(date: Date | string) {
-  if (typeof date === "string") date = new Date(date);
-  return (
-    date.getFullYear() +
-    "." +
-    String(date.getMonth() + 1).padStart(2, "0") +
-    "." +
-    String(date.getDate()).padStart(2, "0")
-  );
-}
+
 export default async function Home() {
   const query = `*[_type=='post'] | order(_createdAt asc){
     title,

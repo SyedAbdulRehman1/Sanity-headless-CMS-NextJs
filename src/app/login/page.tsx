@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, ButtonType } from "../../components/button";
 import Input from "../../components/input";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ButtonLoader from "../../components/laoders/btnloader";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +19,6 @@ function LoginPage() {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [showErrors, setShowErrors] = useState(false);
 
-  const searchParams = useSearchParams();
   //  console.log('return url', searchParams.get('returnUrl'));
   const router = useRouter();
   const handlePassword = () => {

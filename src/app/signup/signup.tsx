@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import Input from "../../components/input";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import { Button, ButtonType } from "@/components/button";
 import ButtonLoader from "@/components/laoders/btnloader";
@@ -27,7 +27,6 @@ const SignupPage: React.FC = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handlePassword = () => {
     setPasswordShow(!passwordShow);

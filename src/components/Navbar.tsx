@@ -77,7 +77,7 @@ export default function Navbar() {
               <Link href="/blog" className="menu-text hover:text-[#499A16]">
                 Blogs
               </Link>
-              <Link href="/article" className="menu-text hover:text-[#499A16]">
+              <Link href={`/article?${Date.now()}`} className="menu-text hover:text-[#499A16]">
                 News
               </Link>
             </div>

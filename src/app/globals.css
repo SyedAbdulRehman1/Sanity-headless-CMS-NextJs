@@ -41,6 +41,12 @@
     border-radius: 50px;
     padding: 10px 12px;
   }
+.news-title {
+  font-size: 24px;
+  line-height: 33px;
+  font-family: "Gilroy";
+  color: #0b231d;
+}
 .news-text {
     font-size: 52px;
     line-height: 62.87px;
@@ -73,4 +79,12 @@
   color: #475467;
   font-size: 14px;
   line-height: 20px;
+}
+@media only screen and (max-width: 1024px) {
+  .news-title {
+    font-size: 20px;
+    line-height: 24px;
+    font-family: "GilroyMedium";
+    color: #0b231d;
+  }
 }
